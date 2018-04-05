@@ -26,7 +26,6 @@ class ViewController: UIViewController {
         if but == true {
         myTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
             but = false
-          
         }else if but == false {
             
             self.myTimer.invalidate()
