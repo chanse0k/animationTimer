@@ -14,23 +14,41 @@ class ViewController: UIViewController {
     
     var counter = 1
     var myTimer = Timer()
-    
+    var file = "right"
+    var but = true
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         imageCounter.text = String(counter)
     }
     @IBAction func play(_ sender: Any) {
-        myTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
+        
+        if but == true {
+        myTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
+            but = false
+          
+        }else if but == false {
+            
+            self.myTimer.invalidate()
+            but = true
+        }
     }
-    @IBAction func stop(_ sender: Any) {
-        myTimer.invalidate()
-    }
+
+    
     @objc func doAnimation() {
-        if counter == 5 {
-            counter = 1
-        } else {
+        
+        if file == "right"{
             counter = counter + 1
+            if counter == 5 {
+                file = "left"
+            }
+            
+        } else if file == "left"{
+            counter = counter - 1
+            if counter == 1{
+                file = "right"
+            }
+            
         }
         myImageView.image = UIImage(named: "frame\(counter).png")
         imageCounter.text = String(counter)
